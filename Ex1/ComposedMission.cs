@@ -8,26 +8,43 @@ namespace Excercise_1
 {
     public class ComposedMission : IMission
     {
-        string IMission.Name => throw new NotImplementedException();
+        private List<Func<double, double>> funcList;
+        private string name;
+        private string type;
 
-        string IMission.Type => throw new NotImplementedException();
-
-        event EventHandler<double> IMission.OnCalculate
+        public ComposedMission(string name)
         {
-            add
-            {
-                throw new NotImplementedException();
-            }
-
-            remove
-            {
-                throw new NotImplementedException();
-            }
+            this.name = name;
+            this.type = "Composed";
+            this.funcList = new List<Func<double, double>>();
         }
 
-        double IMission.Calculate(double value)
+        public string Name => this.name;
+
+        public string Type => this.type;
+
+        public ComposedMission Add(Func<double, double> func)
         {
-            throw new NotImplementedException();
+            this.funcList.Add(func);
+            return this;
+        }
+
+
+        public event EventHandler<double> OnCalculate;
+
+        public double Calculate(double value)
+        {
+            double result = 0, tempValue = value;
+            foreach (Func<double, double> func in funcList)
+            {
+                tempValue = func(tempValue);
+                result = tempValue;
+            }
+            if (OnCalculate != null)
+            {
+                OnCalculate.Invoke(sender: this, e: result);
+            }
+            return result;
         }
     }
 }
