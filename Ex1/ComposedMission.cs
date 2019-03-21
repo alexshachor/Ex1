@@ -8,6 +8,26 @@ namespace Excercise_1
 {
     public class ComposedMission : IMission
     {
-      
+        string IMission.Name => throw new NotImplementedException();
+
+        string IMission.Type => throw new NotImplementedException();
+
+        event EventHandler<double> IMission.OnCalculate
+        {
+            add
+            {
+                throw new NotImplementedException();
+            }
+
+            remove
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        double IMission.Calculate(double value)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
