@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Excercise_1
 {
+    /// <summary>
+    /// This class is responsible for handling a single mission and calculates its result
+    /// </summary>
     public class SingleMission : IMission
     {
         private Func<double, double> func;
@@ -31,6 +34,7 @@ namespace Excercise_1
             double result = this.func(value);
             if (OnCalculate != null)
             {
+                //notify the subscriber for the result 
                 OnCalculate.Invoke(sender: this, e: result);
             }
             return result;
